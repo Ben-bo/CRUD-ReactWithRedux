@@ -9,6 +9,11 @@ body {
 .navhed {
   background-color: #b23cfd;
 }
+.foo {
+  background-color: #b23cfd;
+  color: white;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
