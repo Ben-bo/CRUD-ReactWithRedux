@@ -4,7 +4,7 @@ import { Card } from "react-bootstrap";
 export default function Jumbotron({ name }) {
   return (
     <Card
-      className="shadow-sm mb-4"
+      className="shadow-sm mb-4 text-center"
       style={{ border: "none", height: 250 }}
       bg="light"
     >

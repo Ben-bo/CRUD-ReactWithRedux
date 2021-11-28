@@ -1,4 +1,4 @@
-import "./App.css";
+// import "./App.css";
 import Jumbotron from "./component/Jumbotron";
 import NavbarComponent from "./component/Navbar";
 import React, { Component } from "react";
@@ -22,6 +22,21 @@ class App extends Component {
       {
         id: 3,
         nama: "edwin",
+        umur: 24,
+      },
+      {
+        id: 4,
+        nama: "akshajsh",
+        umur: 24,
+      },
+      {
+        id: 5,
+        nama: "janbxg",
+        umur: 24,
+      },
+      {
+        id: 6,
+        nama: "jnahf",
         umur: 24,
       },
     ],
