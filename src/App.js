@@ -2,9 +2,9 @@
 import Jumbotron from "./component/Jumbotron";
 import NavbarComponent from "./component/Navbar";
 import React, { Component } from "react";
-import TableComponent from "./component/TableComponent";
 import { Container } from "react-bootstrap";
-
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Createpage, Detailpage, Homepage, Editpage } from "./pages";
 class App extends Component {
   state = {
     nama: "beni",
@@ -47,7 +47,23 @@ class App extends Component {
         <NavbarComponent />
         <Jumbotron name={this.state.nama} />
         <Container>
-          <TableComponent dataTable={this.state.users} />
+          <BrowserRouter>
+            <Switch>
+              <Route path="/" exact>
+                <Homepage dataUser={this.state.users} />
+              </Route>
+              <Route path="/create">
+                <Createpage />
+              </Route>
+              <Route path="/edit/:id">
+                <Editpage />
+              </Route>
+              <Route path="/detail/:id">
+                <Detailpage />
+              </Route>
+            </Switch>
+          </BrowserRouter>
+
           <h1>helojj</h1>
         </Container>
       </div>

@@ -13,6 +13,11 @@ body {
   background-color: #b23cfd;
   color: white;
 }
+#tambah {
+  background-color: #b23cfd;
+  color: white;
+  border-color: #b23cfd;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",

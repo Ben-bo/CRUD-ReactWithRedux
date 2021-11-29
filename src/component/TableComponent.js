@@ -1,10 +1,11 @@
 import BootstrapTable from "react-bootstrap-table-next";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import paginationFactory from "react-bootstrap-table2-paginator";
+import { Link } from "react-router-dom";
 
 const { SearchBar } = Search;
 
@@ -33,12 +34,17 @@ const columns = [
     formatter: (contentRow, row) => {
       return (
         <div>
-          <Button variant="primary" style={{ marginRight: 5 }}>
-            <FontAwesomeIcon /> Detail
-          </Button>
-          <Button variant="success" style={{ marginRight: 5 }}>
-            <FontAwesomeIcon /> Edit
-          </Button>
+          <Link to={`/detail/${row.id}`}>
+            <Button variant="primary" style={{ marginRight: 5 }}>
+              {" "}
+              <FontAwesomeIcon /> Detail
+            </Button>
+          </Link>
+          <Link to="/edit/:id">
+            <Button variant="success" style={{ marginRight: 5 }}>
+              <FontAwesomeIcon /> Edit
+            </Button>
+          </Link>
           <Button variant="danger" style={{ marginRight: 5 }}>
             <FontAwesomeIcon icon={faTrash} />
           </Button>
@@ -115,7 +121,15 @@ const TableComponent = ({ dataTable }) => {
           {(props) => (
             <div>
               <Row>
-                <Col></Col>
+                <Col>
+                  <div style={{ float: "left" }}>
+                    <Link to="/create">
+                      <Button id="tambah" style={{ marginRight: 5 }}>
+                        <FontAwesomeIcon icon={faPlus} /> Tambah Data
+                      </Button>
+                    </Link>
+                  </div>
+                </Col>
                 <Col>
                   <div style={{ float: "right" }}>
                     <SearchBar {...props.searchProps} />
@@ -124,6 +138,7 @@ const TableComponent = ({ dataTable }) => {
               </Row>
 
               <BootstrapTable
+                style={{ float: "right" }}
                 {...props.baseProps}
                 pagination={paginationFactory(options)}
               />
