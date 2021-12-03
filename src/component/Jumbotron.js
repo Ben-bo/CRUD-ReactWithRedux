@@ -1,7 +1,11 @@
 import React from "react";
 import { Card } from "react-bootstrap";
+import { connect } from "react-redux";
+const mapStateToProps = (state) => {
+  return { nama: state[0].nama };
+};
 
-export default function Jumbotron({ name }) {
+function Jumbotron(props) {
   return (
     <Card
       className="shadow-sm mb-4 text-center"
@@ -9,9 +13,10 @@ export default function Jumbotron({ name }) {
       bg="light"
     >
       <Card.Title className="my-3">
-        <h1>Welcome {name}</h1>{" "}
+        <h1>Welcome {props.nama}</h1>{" "}
       </Card.Title>
       <Card.Body>This is some text within a card body.</Card.Body>
     </Card>
   );
 }
+export default connect(mapStateToProps, null)(Jumbotron);

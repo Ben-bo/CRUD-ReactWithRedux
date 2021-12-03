@@ -5,7 +5,7 @@ class Homepage extends Component {
   render() {
     return (
       <div>
-        <TableComponent dataTable={this.props.dataUser} />
+        <TableComponent />
       </div>
     );
   }

@@ -6,51 +6,16 @@ import { Container } from "react-bootstrap";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Createpage, Detailpage, Homepage, Editpage } from "./pages";
 class App extends Component {
-  state = {
-    nama: "beni",
-    users: [
-      {
-        id: 1,
-        nama: "beni",
-        umur: 24,
-      },
-      {
-        id: 2,
-        nama: "ahmad",
-        umur: 24,
-      },
-      {
-        id: 3,
-        nama: "edwin",
-        umur: 24,
-      },
-      {
-        id: 4,
-        nama: "akshajsh",
-        umur: 24,
-      },
-      {
-        id: 5,
-        nama: "janbxg",
-        umur: 24,
-      },
-      {
-        id: 6,
-        nama: "jnahf",
-        umur: 24,
-      },
-    ],
-  };
   render() {
     return (
       <div className="App">
         <NavbarComponent />
-        <Jumbotron name={this.state.nama} />
+        <Jumbotron />
         <Container>
           <BrowserRouter>
             <Switch>
               <Route path="/" exact>
-                <Homepage dataUser={this.state.users} />
+                <Homepage />
               </Route>
               <Route path="/create">
                 <Createpage />

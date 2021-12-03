@@ -6,7 +6,7 @@ import { Card, Button, Row, Col } from "react-bootstrap";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { Link } from "react-router-dom";
-
+import { connect } from "react-redux";
 const { SearchBar } = Search;
 
 const columns = [
@@ -59,8 +59,10 @@ const defaultSorted = [
     order: "desc",
   },
 ];
-
-const TableComponent = ({ dataTable }) => {
+const mapStateToProps = (state) => {
+  return { users: state[0].dataUser };
+};
+const TableComponent = (props) => {
   const customTotal = (from, to, size) => (
     <span className="react-bootstrap-table-pagination-total">
       {" "}
@@ -97,10 +99,11 @@ const TableComponent = ({ dataTable }) => {
       },
       {
         text: "All",
-        value: dataTable.length,
+        value: props.users.length,
       },
     ], // A numeric array is also available. the purpose of above example is custom the text
   };
+
   return (
     <Card>
       <Card.Body>
@@ -113,7 +116,7 @@ const TableComponent = ({ dataTable }) => {
         <ToolkitProvider
           headerWrapperClasses="foo"
           keyField="id"
-          data={dataTable}
+          data={props.users}
           columns={columns}
           defaultSorted={defaultSorted}
           search
@@ -150,4 +153,4 @@ const TableComponent = ({ dataTable }) => {
   );
 };
 
-export default TableComponent;
+export default connect(mapStateToProps, null)(TableComponent);
