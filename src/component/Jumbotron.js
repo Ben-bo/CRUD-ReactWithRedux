@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import { connect } from "react-redux";
 const mapStateToProps = (state) => {
-  return { nama: state[0].nama };
+  return { nama: state.user.nama };
 };
 
 function Jumbotron(props) {

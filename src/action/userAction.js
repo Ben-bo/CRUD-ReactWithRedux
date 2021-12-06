@@ -1,6 +1,7 @@
 import axios from "axios";
 export const GET_USER = "GET_USER";
 export const GET_USER_BY_ID = "GET_USER_BY_ID";
+export const POST_USER = "POST_USER";
 export function userAction() {
   return (dispatch) => {
     axios
@@ -44,6 +45,32 @@ export function userById(id) {
       .catch((err) => {
         dispatch({
           type: GET_USER_BY_ID,
+          payload: {
+            data: false,
+            error: err.message,
+          },
+        });
+        console.log(err);
+      });
+  };
+}
+export function postData(data) {
+  return (dispatch) => {
+    axios
+      .post(`http://localhost:5000/dataUser/`, data)
+      .then((res) => {
+        console.log(res.data);
+        dispatch({
+          type: POST_USER,
+          payload: {
+            data: res.data,
+            error: false,
+          },
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: POST_USER,
           payload: {
             data: false,
             error: err.message,

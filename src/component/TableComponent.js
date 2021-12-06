@@ -60,7 +60,7 @@ const defaultSorted = [
   },
 ];
 const mapStateToProps = (state) => {
-  return { users: state[0].dataUser, error: state[0].error };
+  return { users: state.user.dataUser, error: state.user.error };
 };
 const TableComponent = (props) => {
   if (props.users) {
