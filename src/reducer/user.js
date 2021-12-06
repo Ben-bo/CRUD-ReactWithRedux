@@ -1,38 +1,26 @@
+import { GET_USER, GET_USER_BY_ID } from "../action/userAction";
+
 let initialState = {
   nama: "beni",
-  dataUser: [
-    {
-      id: 1,
-      nama: "Beni",
-      alamat: "sumbawa",
-      umur: 24,
-      noHp: "0987786737366",
-    },
-    {
-      id: 2,
-      nama: "deni",
-      alamat: "sumbawa",
-      umur: 24,
-      noHp: "0987786737366",
-    },
-    {
-      id: 3,
-      nama: "dono",
-      alamat: "sumbawa",
-      umur: 24,
-      noHp: "0987786737366",
-    },
-    {
-      id: 4,
-      nama: "ampir",
-      alamat: "sumbawa",
-      umur: 24,
-      noHp: "0987786737366",
-    },
-  ],
+  dataUser: false,
+  dataUserById: false,
   error: false,
 };
 
 export default function user(state = initialState, action) {
-  return state;
+  if (action.type === GET_USER) {
+    return {
+      ...state,
+      dataUser: action.payload.data,
+      error: action.payload.error,
+    };
+  } else if (action.type === GET_USER_BY_ID) {
+    return {
+      ...state,
+      dataUser: action.payload.data,
+      error: action.payload.error,
+    };
+  } else {
+    return state;
+  }
 }

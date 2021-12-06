@@ -14,22 +14,15 @@ class App extends Component {
         <Container>
           <BrowserRouter>
             <Switch>
-              <Route path="/" exact>
-                <Homepage />
-              </Route>
-              <Route path="/create">
-                <Createpage />
-              </Route>
-              <Route path="/edit/:id">
-                <Editpage />
-              </Route>
-              <Route path="/detail/:id">
-                <Detailpage />
-              </Route>
+              <Route path="/" component={Homepage} exact />
+
+              <Route path="/create" component={Createpage} />
+
+              <Route path="/edit/:id" component={Editpage} />
+
+              <Route path="/detail/:id" component={Detailpage} />
             </Switch>
           </BrowserRouter>
-
-          <h1>helojj</h1>
         </Container>
       </div>
     );
