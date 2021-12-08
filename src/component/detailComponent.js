@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
-  return { users: state[0].dataUser, error: state[0].error };
+  return { users: state.user.dataUser, error: state.user.error };
 };
 const detailComponent = (props) => {
   return (

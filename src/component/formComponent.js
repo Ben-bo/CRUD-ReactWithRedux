@@ -1,4 +1,4 @@
-import { faSave } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Component } from "react";
 import { Col, Form, Row, Button } from "react-bootstrap";
@@ -29,6 +29,16 @@ const renderField = ({
         (warning && <p style={{ color: "orange" }}>{error}</p>))}
   </Form.Group>
 );
+const mapStateToProps = (state) => {
+  return {
+    initialValues: {
+      nama: state.user.dataUser.nama,
+      umur: state.user.dataUser.umur,
+      alamat: state.user.dataUser.alamat,
+      nohp: state.user.dataUser.nohp,
+    },
+  };
+};
 class Formcomponent extends Component {
   render() {
     return (
@@ -80,7 +90,18 @@ class Formcomponent extends Component {
                 }}
               >
                 <FontAwesomeIcon icon={faSave} /> Simpan
-              </Button>
+              </Button>{" "}
+              <a
+                href="/"
+                className="btn"
+                style={{
+                  backgroundColor: "#b23cfd",
+                  color: "white",
+                  borderColor: "#b23cfd",
+                }}
+              >
+                <FontAwesomeIcon icon={faArrowLeft} /> KEMBALI
+              </a>
             </Col>
           </Row>
         </Form>
@@ -93,4 +114,4 @@ Formcomponent = reduxForm({
   validate: UserValidation,
   enableReinitialize: true,
 })(Formcomponent);
-export default connect()(Formcomponent);
+export default connect(mapStateToProps, null)(Formcomponent);

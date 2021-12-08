@@ -7,7 +7,24 @@ import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import swal from "sweetalert";
 const { SearchBar } = Search;
+
+swal({
+  title: "Are you sure?",
+  text: "Once deleted, you will not be able to recover this Data!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+}).then((willDelete) => {
+  if (willDelete) {
+    swal("Poof! Your imaginary file has been deleted!", {
+      icon: "success",
+    });
+  } else {
+    swal("Your data is safe!");
+  }
+});
 
 const columns = [
   {
@@ -40,12 +57,16 @@ const columns = [
               <FontAwesomeIcon /> Detail
             </Button>
           </Link>
-          <Link to="/edit/:id">
+          <Link to={`/edit/${row.id}`}>
             <Button variant="success" style={{ marginRight: 5 }}>
               <FontAwesomeIcon /> Edit
             </Button>
           </Link>
-          <Button variant="danger" style={{ marginRight: 5 }}>
+          <Button
+            variant="danger"
+            style={{ marginRight: 5 }}
+            onClick={() => delete row.id}
+          >
             <FontAwesomeIcon icon={faTrash} />
           </Button>
         </div>

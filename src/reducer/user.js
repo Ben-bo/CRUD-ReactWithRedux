@@ -1,4 +1,9 @@
-import { GET_USER, GET_USER_BY_ID, POST_USER } from "../action/userAction";
+import {
+  GET_USER,
+  GET_USER_BY_ID,
+  POST_USER,
+  EDIT_USER,
+} from "../action/userAction";
 
 let initialState = {
   nama: "beni",
@@ -23,6 +28,12 @@ export default function user(state = initialState, action) {
       error: action.payload.error,
     };
   } else if (action.type === POST_USER) {
+    return {
+      ...state,
+      resDataUser: action.payload.data,
+      errorResData: action.payload.error,
+    };
+  } else if (action.type === EDIT_USER) {
     return {
       ...state,
       resDataUser: action.payload.data,
