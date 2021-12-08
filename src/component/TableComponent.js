@@ -8,72 +8,29 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import swal from "sweetalert";
+import { deleteData, userAction } from "../action/userAction";
 const { SearchBar } = Search;
 
-swal({
-  title: "Are you sure?",
-  text: "Once deleted, you will not be able to recover this Data!",
-  icon: "warning",
-  buttons: true,
-  dangerMode: true,
-}).then((willDelete) => {
-  if (willDelete) {
-    swal("Poof! Your imaginary file has been deleted!", {
-      icon: "success",
-    });
-  } else {
-    swal("Your data is safe!");
-  }
-});
+const handleDelete = (dispatch, id) => {
+  swal({
+    title: "Are you sure?",
+    text: "Once deleted, you will not be able to recover this Data!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  }).then((willDelete) => {
+    if (willDelete) {
+      dispatch(deleteData(id));
+      swal("Poof! Your imaginary file has been deleted!", {
+        icon: "success",
+      });
+      dispatch(userAction());
+    } else {
+      swal("Your data is safe!");
+    }
+  });
+};
 
-const columns = [
-  {
-    dataField: "id",
-    text: "ID",
-    sort: true,
-    headerStyle: () => {
-      return { width: "5%" };
-    },
-  },
-  {
-    dataField: "nama",
-    text: "NAMA",
-    sort: true,
-  },
-  {
-    dataField: "umur",
-    text: "UMUR",
-    sort: true,
-  },
-  {
-    dataField: "link",
-    text: "Aksi",
-    formatter: (contentRow, row) => {
-      return (
-        <div>
-          <Link to={`/detail/${row.id}`}>
-            <Button variant="primary" style={{ marginRight: 5 }}>
-              {" "}
-              <FontAwesomeIcon /> Detail
-            </Button>
-          </Link>
-          <Link to={`/edit/${row.id}`}>
-            <Button variant="success" style={{ marginRight: 5 }}>
-              <FontAwesomeIcon /> Edit
-            </Button>
-          </Link>
-          <Button
-            variant="danger"
-            style={{ marginRight: 5 }}
-            onClick={() => delete row.id}
-          >
-            <FontAwesomeIcon icon={faTrash} />
-          </Button>
-        </div>
-      );
-    },
-  },
-];
 const defaultSorted = [
   {
     dataField: "id",
@@ -84,6 +41,54 @@ const mapStateToProps = (state) => {
   return { users: state.user.dataUser, error: state.user.error };
 };
 const TableComponent = (props) => {
+  const columns = [
+    {
+      dataField: "id",
+      text: "ID",
+      sort: true,
+      headerStyle: () => {
+        return { width: "5%" };
+      },
+    },
+    {
+      dataField: "nama",
+      text: "NAMA",
+      sort: true,
+    },
+    {
+      dataField: "umur",
+      text: "UMUR",
+      sort: true,
+    },
+    {
+      dataField: "link",
+      text: "Aksi",
+      formatter: (contentRow, row) => {
+        return (
+          <div>
+            <Link to={`/detail/${row.id}`}>
+              <Button variant="primary" style={{ marginRight: 5 }}>
+                {" "}
+                <FontAwesomeIcon /> Detail
+              </Button>
+            </Link>
+            <Link to={`/edit/${row.id}`}>
+              <Button variant="success" style={{ marginRight: 5 }}>
+                <FontAwesomeIcon /> Edit
+              </Button>
+            </Link>
+            <Button
+              variant="danger"
+              style={{ marginRight: 5 }}
+              onClick={() => handleDelete(props.dispatch, row.id)}
+            >
+              <FontAwesomeIcon icon={faTrash} />
+            </Button>
+          </div>
+        );
+      },
+    },
+  ];
   if (props.users) {
     const customTotal = (from, to, size) => (
       <span className="react-bootstrap-table-pagination-total">

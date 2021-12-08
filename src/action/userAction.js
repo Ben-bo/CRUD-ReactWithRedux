@@ -97,12 +97,24 @@ export function editData(id, data) {
       })
       .catch((err) => {
         dispatch({
-          type: POST_USER,
+          type: EDIT_USER,
           payload: {
             data: false,
             error: err.message,
           },
         });
+        console.log(err);
+      });
+  };
+}
+export function deleteData(id) {
+  return () => {
+    axios
+      .delete(`http://localhost:5000/dataUser/${id}`)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
         console.log(err);
       });
   };
